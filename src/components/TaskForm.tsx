@@ -1,19 +1,18 @@
 import { Box, Button, MenuItem, Select, Stack, TextField } from "@mui/material";
 import Tag from "./Tag";
 import { useState } from "react";
-
-type TaskFormProps = {
-  taskName: string;
-  taskStatus: string;
-  tagNames: string[];
-};
+import { TaskData, useTasksStore } from "./store";
 
 const TaskForm = () => {
-  const [taskData, setTaskData] = useState<TaskFormProps>({
+  const [taskData, setTaskData] = useState<TaskData>({
     taskName: "",
     taskStatus: "",
     tagNames: [],
   });
+
+  const tasks = useTasksStore((state) => state.tasks);
+  const addTask = useTasksStore((state) => state.addTask);
+  const removeTask = useTasksStore((state) => state.removeTask);
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -24,6 +23,8 @@ const TaskForm = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
+    addTask(taskData);
+    console.log(tasks);
   };
   const selectTag = (tag: string) => {
     setTaskData((prev) => {
@@ -33,7 +34,7 @@ const TaskForm = () => {
       return { ...prev, tagNames: filteredTags };
     });
   };
-  console.log(taskData.taskName, taskData.taskStatus, taskData.tagNames);
+  // console.log(taskData.taskName, taskData.taskStatus, taskData.tagNames);
   return (
     <Box justifyContent={"center"} width={"100vw"} sx={{ p: 2 }}>
       <header>Задачи</header>

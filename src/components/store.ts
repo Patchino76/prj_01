@@ -1,15 +1,15 @@
 import {create } from "zustand"
 
-export type TaskObjects = {
+export type TaskData = {
     taskName: string
     taskStatus: string
     tagNames: string[]
 }
 
 type tasksStore = {
-    tasks: TaskObjects[]
-    addTask: (task: TaskObjects) => void
-    removeTask: (task: TaskObjects) => void
+    tasks: TaskData[]
+    addTask: (task: TaskData) => void
+    removeTask: (task: TaskData) => void
 }
 
 export const useTasksStore = create<tasksStore>((set) => ({
