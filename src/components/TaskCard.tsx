@@ -5,10 +5,16 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import Tag from "./Tag";
-import { AiFillDelete } from "react-icons/ai";
 
-const TaskCard = () => {
+import { AiFillDelete } from "react-icons/ai";
+import { TaskData, useTasksStore } from "./store";
+import TagLabel from "./TagLabel";
+interface TaskCardProps {
+  task: TaskData;
+}
+
+const TaskCard = ({task}: TaskCardProps) => {
+  const removeTask = useTasksStore((state) => state.removeTask);
   return (
     <Card sx={{ minWidth: 300 }} variant="outlined">
       <CardContent>
@@ -17,7 +23,7 @@ const TaskCard = () => {
           color="text.secondary"
           gutterBottom
         >
-          Word of the Day
+          {task.taskName}
         </Typography>
 
         <Stack
@@ -27,10 +33,11 @@ const TaskCard = () => {
           sx={{ height: 30 }}
         >
           <Stack direction={"row"} spacing={1}>
-            <Tag tagName="HTML" />
-            <Tag tagName="CSS" />
+            {task.tagNames.map((tagName, index) => (
+              <TagLabel tagName={tagName} key={index} />
+            ))}
           </Stack>
-          <IconButton>
+          <IconButton onClick={() => removeTask(task)}>
             <AiFillDelete />
           </IconButton>
         </Stack>

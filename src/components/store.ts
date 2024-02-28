@@ -1,9 +1,10 @@
 import {create } from "zustand"
+import { taskData } from "./data"
 
-export type TaskData = {
-    taskName: string
-    taskStatus: string
-    tagNames: string[]
+export interface TaskData  {
+    taskName: string,
+        taskStatus: string,
+    tagNames: string[],
 }
 
 type tasksStore = {
@@ -13,7 +14,7 @@ type tasksStore = {
 }
 
 export const useTasksStore = create<tasksStore>((set) => ({
-    tasks: [],
+    tasks: taskData,
     addTask: (task) => set((state) => ({
         tasks: [...state.tasks, task]
     })),

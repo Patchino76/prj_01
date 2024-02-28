@@ -64,9 +64,10 @@ const TaskForm = () => {
               label="Статус на задачата"
               onChange={handleChange}
             >
-              <MenuItem value="Започва">Започва</MenuItem>
-              <MenuItem value="Работи се">Работи се</MenuItem>
-              <MenuItem value="Завършена">Завършена</MenuItem>
+              <MenuItem value="To Do">Започва</MenuItem>
+              <MenuItem value="In Progress">Работи се</MenuItem>
+              <MenuItem value="Done">Завършена</MenuItem>
+              <MenuItem value="On Hold">Изчаква</MenuItem>
             </Select>
             <Button
               variant="contained"

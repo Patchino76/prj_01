@@ -11,7 +11,7 @@ const Tag = ({ tagName, selectTag }: TagProps) => {
   return (
     <Button
       variant="outlined"
-      color={butChecked ? "success" : "warning"}
+      color={butChecked ? "success" : "info"}
       onClick={() => {
         selectTag(tagName);
         setButChecked(!butChecked);
