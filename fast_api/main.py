@@ -1,12 +1,9 @@
 from fastapi import FastAPI
 
 import uvicorn
-from routers.tasks import router as task_router
+from routers.tasks_router import router as tasks_router
 from contextlib import asynccontextmanager
 from modeling.database import database
-
-app = FastAPI()
-app.include_router(task_router, prefix="/tasks")
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -14,14 +11,13 @@ async def lifespan(app: FastAPI):
     yield
     await database.disconnect()
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
+
 
 host = "localhost"
 port = 8000
 app = FastAPI(lifespan=lifespan)
-app.include_router(task_router)
+app.include_router(tasks_router, prefix="/tasks")
+
 
 
 if __name__ == "__main__":

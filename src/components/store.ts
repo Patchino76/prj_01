@@ -3,7 +3,7 @@ import { taskData } from "./data"
 
 export interface TaskData  {
     taskName: string,
-        taskStatus: string,
+    taskStatus: string,
     tagNames: string[],
 }
 

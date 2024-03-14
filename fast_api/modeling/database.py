@@ -1,5 +1,6 @@
 import databases
 import sqlalchemy
+from sqlalchemy.orm import sessionmaker
 
 
 DATABSE_URL = "sqlite:///./test.db"
@@ -23,6 +24,7 @@ tags_table = sqlalchemy.Table(
 )
 
 engine = sqlalchemy.create_engine(DATABSE_URL, connect_args={"check_same_thread": False})
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 metadata.create_all(engine)
 
 database = databases.Database(DATABSE_URL, force_rollback=False)
